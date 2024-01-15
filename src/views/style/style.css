@@ -1,0 +1,216 @@
+/* All */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    background-color: #f5f5f5;
+    padding: 8rem;
+    text-align: center;
+    width: 50%;
+    border-radius: 1rem;
+    margin: auto;
+    min-height: calc(100vh - (2rem * 2));
+}
+
+
+
+/* Home */
+.article-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+.article-box {
+    background-color: white;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.homepage-container {
+    align-items: center;
+    width: 100%;
+}
+
+
+/* Login and Signup */
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+/* FormButton */
+button {
+    background-color: #0CA14B;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #00714B;
+}
+div > button {
+    width: 100%;
+}
+
+/* FormInput */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+/* Header */
+header {
+    top: 0;
+    position: fixed; /* Use fixed instead of absolute to keep the header fixed at the top */
+    background-color: darkslategrey;
+    padding: 1rem;
+    text-align: center;
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.logout-button {
+    background-color: #B30000;
+    color: white;
+    margin-right: 2rem;
+}
+.logout-button:hover {
+    background-color: #9A0000;
+}
+
+
+.event-form-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.event-form-container h3 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.event-form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.event-form-container label {
+    margin-bottom: 8px;
+}
+
+.event-form-container input,
+.event-form-container textarea {
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.event-form-container button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.event-form-container button[type="button"] {
+    background-color: #ccc;
+    margin-top: 10px;
+}
+
+.footer-container {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+
+}
+
+.footer-container nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-container nav li {
+    display: inline-block;
+    margin: 2rem;
+}
+
+.footer-container nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.footer-container nav a:hover {
+    color: #007bff;
+}
+
+
+
+.event-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.event-container h3 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.event-container p {
+    margin-bottom: 16px;
+}
+
+.event-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.event-container li {
+    margin-bottom: 8px;
+}
