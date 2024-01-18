@@ -4,6 +4,7 @@ import '../style/style.css'
 import Header from "../components/Header";
 import FormInput from "../components/FormInput";
 import Footer from "../components/Footer";
+import {useNavigate} from "react-router-dom";
 
 const HomePage = () => {
     const [upcomingEvent, setUpcomingEvent] = useState(null);
@@ -63,7 +64,6 @@ const HomePage = () => {
                 },
             });
 
-            // Fetch upcoming event again after creating a new event
             fetchUpcomingEvent();
             setShowCreateEventForm(false);
         } catch (error) {
@@ -72,10 +72,20 @@ const HomePage = () => {
         }
     };
 
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+
+        navigate("/login");
+    };
+
     return (
         <div>
             <Header isAuthenticated={true} onLogout={() => console.log("Logout")} />
             <main>
+                <button onClick={handleLogout} className="logout-button">
+                    Logout
+                </button>
                 <h2>Home Page</h2>
 
                 <div className='event-container'>

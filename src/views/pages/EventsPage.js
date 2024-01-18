@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../style/style.css'
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import {useNavigate} from "react-router-dom";
 
 const EventsPage = () => {
     const [events, setEvents] = useState([]);
@@ -28,10 +29,20 @@ const EventsPage = () => {
         }
     };
 
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+
+        navigate("/login");
+    };
+
     return (
         <div>
             <Header isAuthenticated={true} onLogout={() => console.log("Logout")} />
             <main>
+                <button onClick={handleLogout} className="logout-button">
+                    Logout
+                </button>
                 <h2>Events</h2>
                 <div className='event-container'>
                     <ul>
