@@ -97,18 +97,18 @@ const HomePage = () => {
                         <div className="event-box">
                             <h3>Upcoming Event</h3>
                             <div className="event-details">
-                                <p>
+                                <div>
                                     <strong>{upcomingEvent.title}</strong>
-                                </p>
-                                <p>
+                                </div>
+                                <div>
                                     <strong>Date:</strong> {new Date(upcomingEvent.date).toLocaleDateString('en-GB')}
-                                </p>
-                                <p>
+                                </div>
+                                <div>
                                     <strong>Location:</strong> {upcomingEvent.location}
-                                </p>
-                                <p>
+                                </div>
+                                <div>
                                     <strong>Description:</strong> <p>{upcomingEvent.description}</p>
-                                </p>
+                                </div>
                             </div>
                         </div>
                     )}
