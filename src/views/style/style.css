@@ -92,7 +92,7 @@ input:focus {
 /* Header */
 header {
     top: 0;
-    position: fixed; /* Use fixed instead of absolute to keep the header fixed at the top */
+    position: fixed;
     background-color: darkslategrey;
     padding: 1rem;
     text-align: center;
@@ -200,7 +200,7 @@ header {
 
 
 .event-container {
-    max-width: 400px;
+    max-width: 600px;
     margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -218,6 +218,7 @@ header {
     margin-bottom: 16px;
 }
 
+/* EventsPage */
 .event-container ul {
     list-style: none;
     padding: 0;
@@ -225,5 +226,37 @@ header {
 }
 
 .event-container li {
-    margin-bottom: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: aquamarine;
+}
+
+.event-container li strong {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.event-container li span {
+    color: #555;
+}
+
+.event-box {
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.event-box h3 {
+    font-size: 1.5em;
+    margin-bottom: 20px; /* Reduced margin */
+    border-bottom: 2px solid #333; /* Shorter line underneath "Upcoming Event" */
+}
+
+.event-details {
+    background-color: aquamarine;
+    border-radius: 8px;
+    padding: 10px;
 }

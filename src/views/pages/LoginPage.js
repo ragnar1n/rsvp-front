@@ -1,13 +1,16 @@
+// Import necessary libraries
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../style/style.css'
-import FormInput from "../components/FormInput";
-import Header from "../components/Header";
+import { useNavigate } from 'react-router-dom';
+import '../style/style.css';
+import FormInput from '../components/FormInput';
+import Header from '../components/Header';
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
@@ -26,7 +29,13 @@ const LoginPage = () => {
                 password: password,
             });
 
+            const token = response.data.token;
+
+            localStorage.setItem('token', token);
+
             console.log('Login successful:', response.data);
+
+            navigate('/');
         } catch (error) {
             setErrorMessage('Invalid username or password');
             console.error('Login failed:', error);
@@ -35,17 +44,34 @@ const LoginPage = () => {
 
     return (
         <div>
-            <Header isAuthenticated={false} onLogout={() => console.log("Logout")} />
+            <Header />
             <main>
                 <h1>Login</h1>
                 <form onSubmit={handleLogin}>
-                    <FormInput onChange={handleUsernameChange} name="username" type="text" label="Username" placeholder="johnny" />
-                    <FormInput onChange={handlePasswordChange} name="password" type="password" label="Password" placeholder="********"></FormInput>
+                    <FormInput
+                        onChange={handleUsernameChange}
+                        name="username"
+                        type="text"
+                        label="Username"
+                        placeholder="johnny"
+                    />
+                    <FormInput
+                        onChange={handlePasswordChange}
+                        name="password"
+                        type="password"
+                        label="Password"
+                        placeholder="********"
+                    />
                     <br />
                     <button type="submit">Login</button>
                 </form>
                 <div>
-                    <p>Don't have an account? <a href="/register"><b>Sign up</b></a></p>
+                    <p>
+                        Don't have an account?{' '}
+                        <a href="/register">
+                            <b>Sign up</b>
+                        </a>
+                    </p>
                 </div>
                 {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
             </main>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../style/style.css'
+import '../style/style.css';
 import Header from "../components/Header";
 import FormInput from "../components/FormInput";
 import Footer from "../components/Footer";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
     const [upcomingEvent, setUpcomingEvent] = useState(null);
@@ -14,19 +14,26 @@ const HomePage = () => {
     const [newEventTitle, setNewEventTitle] = useState('');
     const [newEventDate, setNewEventDate] = useState('');
     const [newEventLocation, setNewEventLocation] = useState('');
-    const [newEventOrganizerID, setNewEventOrganizerID] = useState('');
     const [newEventDescription, setNewEventDescription] = useState('');
 
+    const navigate = useNavigate();
+
     useEffect(() => {
-        fetchUpcomingEvent();
-    }, []);
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            navigate('/login');
+        } else {
+            fetchUpcomingEvent();
+        }
+    }, [navigate]);
 
     const fetchUpcomingEvent = async () => {
         try {
             const response = await axios.get('http://localhost:3006/upcoming', {
                 headers: {
-                    // Include authentication token if needed
-                    // Authorization: `Bearer ${yourAuthToken}`,
+                    // Include authentication token
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             });
 
@@ -53,35 +60,31 @@ const HomePage = () => {
                 title: newEventTitle,
                 date: newEventDate,
                 location: newEventLocation,
-                organizerID: newEventOrganizerID,
                 description: newEventDescription,
             };
 
             await axios.post('http://localhost:3006/create-event', eventData, {
                 headers: {
-                    // Include authentication token if needed
-                    // Authorization: `Bearer ${yourAuthToken}`,
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             });
 
             fetchUpcomingEvent();
             setShowCreateEventForm(false);
         } catch (error) {
-            setErrorMessage('Failed to create event. Please try again.');
-            console.error('Failed to create event:', error);
+            setErrorMessage('Failed to create an event. Please try again.');
+            console.error('Failed to create an event:', error);
         }
     };
 
-    const navigate = useNavigate();
-
     const handleLogout = () => {
-
-        navigate("/login");
+        localStorage.removeItem('token');
+        navigate('/login');
     };
 
     return (
         <div>
-            <Header isAuthenticated={true} onLogout={() => console.log("Logout")} />
+            <Header />
             <main>
                 <button onClick={handleLogout} className="logout-button">
                     Logout
@@ -91,12 +94,22 @@ const HomePage = () => {
                 <div className='event-container'>
                     {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
                     {upcomingEvent && (
-                        <div>
+                        <div className="event-box">
                             <h3>Upcoming Event</h3>
-
-                            <p>
-                                <strong>{upcomingEvent.title}</strong> - {upcomingEvent.description}
-                            </p>
+                            <div className="event-details">
+                                <p>
+                                    <strong>{upcomingEvent.title}</strong>
+                                </p>
+                                <p>
+                                    <strong>Date:</strong> {new Date(upcomingEvent.date).toLocaleDateString('en-GB')}
+                                </p>
+                                <p>
+                                    <strong>Location:</strong> {upcomingEvent.location}
+                                </p>
+                                <p>
+                                    <strong>Description:</strong> <p>{upcomingEvent.description}</p>
+                                </p>
+                            </div>
                         </div>
                     )}
                 </div>
@@ -129,13 +142,6 @@ const HomePage = () => {
                                 onChange={(e) => setNewEventLocation(e.target.value)}
                             />
                             <FormInput
-                                type="text"
-                                name="newEventOrganizerID"
-                                label="Organizer ID:"
-                                placeholder="Enter organizer ID"
-                                onChange={(e) => setNewEventOrganizerID(e.target.value)}
-                            />
-                            <FormInput
                                 type="textarea"
                                 name="newEventDescription"
                                 label="Description:"
@@ -151,9 +157,8 @@ const HomePage = () => {
                     </div>
                 )}
             </main>
-            <Footer/>
+            <Footer />
         </div>
-
     );
 };
 

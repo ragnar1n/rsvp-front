@@ -1,24 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../style/style.css'
+import '../style/style.css';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const EventsPage = () => {
     const [events, setEvents] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
 
+    const navigate = useNavigate();
+
     useEffect(() => {
-        fetchEvents();
-    }, []);
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            navigate('/login');
+        } else {
+            fetchEvents();
+        }
+    }, [navigate]);
 
     const fetchEvents = async () => {
         try {
             const response = await axios.get('http://localhost:3006/events', {
                 headers: {
-                    // Include authentication token if needed
-                    // Authorization: `Bearer ${yourAuthToken}`,
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             });
 
@@ -29,16 +36,14 @@ const EventsPage = () => {
         }
     };
 
-    const navigate = useNavigate();
-
     const handleLogout = () => {
-
-        navigate("/login");
+        localStorage.removeItem('token');
+        navigate('/login');
     };
 
     return (
         <div>
-            <Header isAuthenticated={true} onLogout={() => console.log("Logout")} />
+            <Header />
             <main>
                 <button onClick={handleLogout} className="logout-button">
                     Logout
@@ -48,17 +53,19 @@ const EventsPage = () => {
                     <ul>
                         {events.map((event) => (
                             <li key={event.id}>
-                                <strong>{event.title}</strong> - {event.description}
+                                <strong>{event.title}</strong>
+                                <p>Date: {new Date(event.date).toLocaleDateString('en-GB')}</p>
+                                <p>Location: {event.location}</p>
+                                <strong>Description:</strong> <p>{event.description}</p>
                             </li>
                         ))}
                     </ul>
 
-                {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+                    {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
                 </div>
             </main>
-            <Footer/>
+            <Footer />
         </div>
-
     );
 };
 
