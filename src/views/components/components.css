@@ -1,0 +1,107 @@
+button {
+    background-color: darkgray;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: gray;
+}
+
+div > button {
+    width: 100%;
+}
+
+/* FormInput */
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: #007bff;
+}
+
+/* Header */
+header {
+    top: 0;
+    position: fixed;
+    background-color: darkslategrey;
+    padding: 1rem;
+    text-align: center;
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    transform: translateX(-9%);
+}
+
+/* Logout */
+.logout-button {
+    background-color: #B30000;
+    color: white;
+    position: absolute;
+    top: 6rem;
+    right: 1rem;
+}
+
+.logout-button:hover {
+    background-color: #9A0000;
+}
+
+/* Footer */
+.footer-container {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-container nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-container nav li {
+    display: inline-block;
+    margin: 2rem;
+}
+
+.footer-container nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.footer-container nav a:hover {
+    color: #007bff;
+}
+
+

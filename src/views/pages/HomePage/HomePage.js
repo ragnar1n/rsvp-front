@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../style/style.css';
-import Header from "../components/Header";
-import FormInput from "../components/FormInput";
-import Footer from "../components/Footer";
+import './home.css';
+import '../../style/style.css'
+import Header from "../../components/Header";
+import FormInput from "../../components/FormInput";
+import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
     const [upcomingEvent, setUpcomingEvent] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
     const [showCreateEventForm, setShowCreateEventForm] = useState(false);
-
     const [newEventTitle, setNewEventTitle] = useState('');
     const [newEventDate, setNewEventDate] = useState('');
     const [newEventLocation, setNewEventLocation] = useState('');
@@ -32,12 +32,17 @@ const HomePage = () => {
         try {
             const response = await axios.get('http://localhost:3006/upcoming', {
                 headers: {
-                    // Include authentication token
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             });
 
-            setUpcomingEvent(response.data);
+            console.log('Response data:', response.data);
+
+            if (response.data.success && response.data.title && response.data.date && response.data.location) {
+                setUpcomingEvent(response.data);
+            } else {
+                setErrorMessage('Failed to fetch upcoming events. Response data is missing necessary properties.');
+            }
         } catch (error) {
             setErrorMessage('Failed to fetch upcoming events.');
             console.error('Failed to fetch upcoming events:', error);
@@ -105,9 +110,6 @@ const HomePage = () => {
                                 </div>
                                 <div>
                                     <strong>Location:</strong> {upcomingEvent.location}
-                                </div>
-                                <div>
-                                    <strong>Description:</strong> <p>{upcomingEvent.description}</p>
                                 </div>
                             </div>
                         </div>

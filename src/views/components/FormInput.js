@@ -1,4 +1,5 @@
 import '../style/style.css';
+import './components.css'
 
 const FormInput = ({ type, name, label, placeholder, onChange }) => {
 

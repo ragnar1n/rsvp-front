@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../style/style.css';
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { useNavigate } from "react-router-dom";
+import '../../style/style.css';
+import './events.css'
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import { Link, useNavigate } from "react-router-dom";
 
 const EventsPage = () => {
     const [events, setEvents] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
-
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -52,15 +52,14 @@ const EventsPage = () => {
                 <div className='event-container'>
                     <ul>
                         {events.map((event) => (
-                            <li key={event.id}>
+                            <li key={event.idEvent}>
                                 <strong>{event.title}</strong>
                                 <p>Date: {new Date(event.date).toLocaleDateString('en-GB')}</p>
                                 <p>Location: {event.location}</p>
-                                <strong>Description:</strong> <p>{event.description}</p>
+                                <Link to={`/events/${event.idEvent}`}>Details</Link>
                             </li>
                         ))}
                     </ul>
-
                     {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
                 </div>
             </main>

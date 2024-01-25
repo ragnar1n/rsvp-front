@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../style/style.css';
-import FormInput from '../components/FormInput';
-import Header from '../components/Header';
+import './auth.css';
+import '../../style/style.css'
+import FormInput from '../../components/FormInput';
+import Header from '../../components/Header';
 
 const RegistrationPage = () => {
     const navigate = useNavigate();
